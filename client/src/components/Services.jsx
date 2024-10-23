@@ -23,7 +23,7 @@ const servicesData = [
     title: "Online Exam",
     imgSrc: "/assets/images/services/3.png",
     alt: "Online Exam Service",
-    link: "#",
+    link: "/sign-in",
     buttonLabel: "Get Started",
   },
 ];
