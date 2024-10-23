@@ -1,0 +1,89 @@
+/* Timeline container */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* Timeline item */
+  .timeline-item {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    margin-bottom: 40px;
+  }
+  
+  /* Timeline icon (dot) */
+  .timeline-icon {
+    position: absolute;
+    left: -15px;
+    top: 0;
+    background-color: #F7B777;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  
+  /* Vertical line */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #F7B777;
+    z-index: 0;
+  }
+  
+  /* Timeline content box */
+  .timeline-content {
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    position: relative;
+    margin-left: 40px; /* Space for the dot */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Arrow pointing to the content box */
+  .timeline-arrow {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #fff transparent transparent;
+  }
+  
+  /* Description text truncation (with Read More functionality) */
+  .timeline-content p {
+    margin: 10px 0;
+    color: #666;
+  }
+  
+  /* For mobile responsiveness */
+  @media (max-width: 768px) {
+    .timeline-item {
+      margin-bottom: 20px;
+    }
+    .timeline::before {
+      left: 0;
+    }
+    .timeline-content {
+      margin-left: 30px;
+    }
+    .timeline-icon {
+      left: 0;
+    }
+  }
+  
