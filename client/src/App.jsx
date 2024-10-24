@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
- // Layout with Navbar
- // Layout without Navbar
+// Layout with Navbar
+// Layout without Navbar
 import ScrollToTop from "./common/ScrollTotop";
 import Home from "./pages/Home";
 import GallereyPage from "./pages/GallereyPage";
@@ -18,6 +18,7 @@ import BlogPage from "../Admin/Pages/BlogPage"; // Admin Blog Page
 import { EditorProvider } from "../Admin/utils/EditorContext"; // Admin Editor Context
 import NoNavbarLayout from "./layout/Nonav";
 import MainLayout from "./layout/Layout";
+import Quizpage from "./pages/Quizpage";
 
 function App() {
   return (
@@ -41,7 +42,7 @@ function App() {
           <Route path="/sign-up" element={<SignUpForm />} />
           <Route path="/exam" element={<ExamPage />} />
         </Route>
-
+        <Route path="/quiz" element={<Quizpage />} />
         {/* Admin Routes */}
         <Route path="/admin/*" element={<Admin />} />
         <Route

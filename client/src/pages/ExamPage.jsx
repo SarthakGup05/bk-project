@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Typography, Button, IconButton, Container, Grid, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, IconButton, Container, Grid, Box, Menu, MenuItem, Avatar } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/system";
@@ -22,6 +22,7 @@ const LanguageButton = styled(Button)(({ theme }) => ({
 
 const ExamPage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null); // State to control the profile menu
 
   const languages = [
     "Hindi (हिंदी)",
@@ -39,6 +40,14 @@ const ExamPage = () => {
     setSelectedLanguage(language);
   };
 
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleProfileMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
       {/* Navbar */}
@@ -49,32 +58,11 @@ const ExamPage = () => {
               AMAP Project
             </Typography>
 
-            <Box sx={{ display: "flex", gap: "20px" }}>
-              {/* <Button
-                component={Link}
-                to="/"
-                sx={{ color: "#fff", fontWeight: "bold", textTransform: "none" }}
-              >
-                Home
-              </Button>
-              <Button
-                component={Link}
-                to="/about"
-                sx={{ color: "#fff", fontWeight: "bold", textTransform: "none" }}
-              >
-                About
-              </Button>
-              <Button
-                component={Link}
-                to="/contact"
-                sx={{ color: "#fff", fontWeight: "bold", textTransform: "none" }}
-              >
-                Contact
-              </Button> */}
+            <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
               {/* Exam Button */}
               <Button
                 component={Link}
-                to="/exam"
+                to="/quiz"
                 sx={{
                   color: "#F7B777",
                   backgroundColor: "#fff",
@@ -87,6 +75,30 @@ const ExamPage = () => {
               >
                 Exam
               </Button>
+
+              {/* Profile Icon */}
+              <IconButton onClick={handleProfileMenuOpen} sx={{ padding: 0 }}>
+                <Avatar sx={{ backgroundColor: "#fff", color: "#F7B777" }} />
+              </IconButton>
+
+              {/* Profile Menu */}
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleProfileMenuClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
+                <MenuItem onClick={handleProfileMenuClose}>My Account</MenuItem>
+                <MenuItem onClick={handleProfileMenuClose}>Logout</MenuItem>
+              </Menu>
             </Box>
           </Toolbar>
         </Container>
