@@ -58,7 +58,7 @@ const Hero = () => {
             ))}
           </Slider>
         </div> */}
-        <div className="container-fluid p-0">
+        <div className="container-fluid p-0 mt-20 sm:18">
           <Swiper
             loop={true}
             autoplay={{

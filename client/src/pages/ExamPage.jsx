@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AppBar, Toolbar, Typography, Button, IconButton, Container, Grid, Box, Menu, MenuItem, Avatar } from "@mui/material";
-import { Menu as MenuIcon } from "@mui/icons-material";
+import { Menu as MenuIcon, Home as HomeIcon } from "@mui/icons-material"; // Import Home icon
 import { Link } from "react-router-dom";
 import { styled } from "@mui/system";
 
@@ -76,6 +76,11 @@ const ExamPage = () => {
                 Exam
               </Button>
 
+              {/* Home Icon */}
+              <IconButton component={Link} to="/" sx={{ color: "#fff" }}>
+                <HomeIcon className="text-white" />
+              </IconButton>
+
               {/* Profile Icon */}
               <IconButton onClick={handleProfileMenuOpen} sx={{ padding: 0 }}>
                 <Avatar sx={{ backgroundColor: "#fff", color: "#F7B777" }} />
@@ -96,6 +101,7 @@ const ExamPage = () => {
                 }}
               >
                 <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
+                <MenuItem onClick={handleProfileMenuClose}>Dashboard</MenuItem>
                 <MenuItem onClick={handleProfileMenuClose}>My Account</MenuItem>
                 <MenuItem onClick={handleProfileMenuClose}>Logout</MenuItem>
               </Menu>

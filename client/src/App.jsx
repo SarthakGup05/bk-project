@@ -22,6 +22,7 @@ import Quizpage from "./pages/Quizpage";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import Volunteer from "./pages/Volunteer";
+import DevineExperience from "./pages/DevineExperience";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/volunteer-us" element={<Volunteer />} />
+          <Route path="/devine" element={<DevineExperience />} />
         </Route>
        
 
