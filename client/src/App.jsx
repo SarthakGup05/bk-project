@@ -19,6 +19,9 @@ import { EditorProvider } from "../Admin/utils/EditorContext"; // Admin Editor C
 import NoNavbarLayout from "./layout/Nonav";
 import MainLayout from "./layout/Layout";
 import Quizpage from "./pages/Quizpage";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
+import Volunteer from "./pages/Volunteer";
 
 function App() {
   return (
@@ -34,7 +37,11 @@ function App() {
           <Route path="/schedule" element={<Date />} />
           <Route path="/anubhav" element={<Anubhav />} />
           <Route path="/bhatti" element={<Bhatti />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/volunteer-us" element={<Volunteer />} />
         </Route>
+       
 
         {/* Routes without Navbar */}
         <Route element={<NoNavbarLayout />}>

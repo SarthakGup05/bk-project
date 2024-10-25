@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css'; // Import the lightbox styles
+import Masonry from 'react-masonry-css'; // Import Masonry layout
 
-const GalleryPage = () => {
+const MissionaryGallery = () => {
   const { category } = useParams();
   const navigate = useNavigate();
 
-  // Dummy data based on categories
+  // Gallery data categorized by topic
   const galleries = {
     yoga: [
       { src: '/assets/images/_yoga/8.png', alt: 'Yoga Image 1' },
@@ -30,31 +29,29 @@ const GalleryPage = () => {
   // Combining all categories into one array for 'all'
   const allImages = [...galleries.yoga, ...galleries.winner, ...galleries.ngo];
 
-  // State to store the currently selected category
+  // State for currently selected category
   const [selectedCategory, setSelectedCategory] = useState(category || 'all');
-  const [isOpen, setIsOpen] = useState(false); // State for lightbox open
-  const [photoIndex, setPhotoIndex] = useState(0); // State for tracking the current image
 
-  // Function to handle category changes
+  // Function to handle category change
   const handleFilterChange = (newCategory) => {
     setSelectedCategory(newCategory);
-    navigate(`/gallery/${newCategory}`); // Update the URL to match the selected category
+    navigate(`/gallery/${newCategory}`);
   };
 
-  // If 'all' is selected, show all images; otherwise, show the selected category's images
-  const galleryItems =
-    selectedCategory === 'all' ? allImages : galleries[selectedCategory] || [];
+  // Determine gallery items to display
+  const galleryItems = selectedCategory === 'all' ? allImages : galleries[selectedCategory] || [];
 
-  // Function to handle image click and open the lightbox
-  const handleImageClick = (index) => {
-    setPhotoIndex(index);
-    setIsOpen(true);
+  // Define breakpoints for Masonry layout (columns change at these screen widths)
+  const breakpointColumnsObj = {
+    default: 3, // 3 columns by default
+    1100: 2,    // 2 columns at screens wider than 1100px
+    700: 1,     // 1 column at screens smaller than 700px
   };
 
   return (
-    <div>
-      {/* Page Heading */}
-      <h1 className="text-3xl font-bold text-center my-8">
+    <div className="container mx-auto p-8">
+      {/* Page Title */}
+      <h1 className="text-4xl font-bold text-center mb-8">
         {selectedCategory === 'all'
           ? 'All'
           : selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}{' '}
@@ -97,31 +94,27 @@ const GalleryPage = () => {
         </button>
       </div>
 
-      {/* Gallery Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Masonry Grid Layout */}
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
         {galleryItems.map((item, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow-lg p-6 transform transition-transform hover:-translate-y-2 cursor-pointer"
-            onClick={() => handleImageClick(index)}
+            className="bg-white rounded-lg shadow-lg p-6 mb-4 transform transition-transform hover:-translate-y-2 cursor-pointer"
           >
-            <img src={item.src} alt={item.alt} className="w-full h-auto rounded-md" />
+            <img
+              src={item.src}
+              alt={item.alt}
+              className="w-full h-auto rounded-md object-cover"
+            />
           </div>
         ))}
-      </div>
-
-      {/* Lightbox for image viewing */}
-      {isOpen && (
-        <Lightbox
-          slides={galleryItems.map(item => ({ src: item.src, alt: item.alt }))}
-          index={photoIndex}
-          onClose={() => setIsOpen(false)}
-          onPrev={() => setPhotoIndex((photoIndex - 1 + galleryItems.length) % galleryItems.length)}
-          onNext={() => setPhotoIndex((photoIndex + 1) % galleryItems.length)}
-        />
-      )}
+      </Masonry>
     </div>
   );
 };
 
-export default GalleryPage;
+export default MissionaryGallery;
