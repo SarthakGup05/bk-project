@@ -1,56 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Masonry from 'react-masonry-css'; // Import Masonry layout
+import LightGallery from 'lightgallery/react';
+import lgZoom from 'lightgallery/plugins/zoom';
+import lgVideo from 'lightgallery/plugins/video';
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-video.css';
 
 const MissionaryGallery = () => {
   const { category } = useParams();
   const navigate = useNavigate();
 
-  // Gallery data categorized by topic
   const galleries = {
     yoga: [
-      { src: '/assets/images/_yoga/8.png', alt: 'Yoga Image 1' },
-      { src: '/assets/images/_yoga/9.png', alt: 'Yoga Image 1' },
-      { src: '/assets/images/_yoga/10.png', alt: 'Yoga Image 1' },
+      { src: '/assets/images/_yoga/8.png', thumb: '/assets/images/_yoga/8.png', alt: 'Yoga Image 1' },
+      { src: '/assets/images/_yoga/9.png', thumb: '/assets/images/_yoga/9.png', alt: 'Yoga Image 2' },
+      { src: '/assets/images/_yoga/10.png', thumb: '/assets/images/_yoga/10.png', alt: 'Yoga Image 3' },
     ],
     winner: [
-      { src: '/assets/images/winners/1.png', alt: 'Winner Image 1' },
-      { src: '/assets/images/winners/2.png', alt: 'Winner Image 2' },
-      { src: '/assets/images/winners/3.png', alt: 'Winner Image 3' },
-      { src: '/assets/images/winners/4.png', alt: 'Winner Image 4' },
-      { src: '/assets/images/winners/5.png', alt: 'Winner Image 5' },
+      { src: '/assets/images/winners/1.png', thumb: '/assets/images/winners/1.png', alt: 'Winner Image 1' },
+      { src: '/assets/images/winners/2.png', thumb: '/assets/images/winners/2.png', alt: 'Winner Image 2' },
+      { src: '/assets/images/winners/3.png', thumb: '/assets/images/winners/3.png', alt: 'Winner Image 3' },
+      { src: '/assets/images/winners/4.png', thumb: '/assets/images/winners/4.png', alt: 'Winner Image 4' },
+      { src: '/assets/images/winners/5.png', thumb: '/assets/images/winners/5.png', alt: 'Winner Image 5' },
     ],
     ngo: [
-      { src: '/assets/images/_ngo/6.png', alt: 'NGO Image 1' },
-      { src: '/assets/images/_ngo/7.png', alt: 'NGO Image 2' },
+      { src: '/assets/images/_ngo/6.png', thumb: '/assets/images/_ngo/6.png', alt: 'NGO Image 1' },
+      { src: '/assets/images/_ngo/7.png', thumb: '/assets/images/_ngo/7.png', alt: 'NGO Image 2' },
     ],
   };
 
-  // Combining all categories into one array for 'all'
   const allImages = [...galleries.yoga, ...galleries.winner, ...galleries.ngo];
-
-  // State for currently selected category
   const [selectedCategory, setSelectedCategory] = useState(category || 'all');
 
-  // Function to handle category change
   const handleFilterChange = (newCategory) => {
     setSelectedCategory(newCategory);
     navigate(`/gallery/${newCategory}`);
   };
 
-  // Determine gallery items to display
   const galleryItems = selectedCategory === 'all' ? allImages : galleries[selectedCategory] || [];
-
-  // Define breakpoints for Masonry layout (columns change at these screen widths)
-  const breakpointColumnsObj = {
-    default: 3, // 3 columns by default
-    1100: 2,    // 2 columns at screens wider than 1100px
-    700: 1,     // 1 column at screens smaller than 700px
-  };
 
   return (
     <div className="container mx-auto p-8">
-      {/* Page Title */}
       <h1 className="text-4xl font-bold text-center mb-8">
         {selectedCategory === 'all'
           ? 'All'
@@ -58,8 +49,7 @@ const MissionaryGallery = () => {
         Pictures
       </h1>
 
-      {/* Filter Buttons */}
-      <div className="flex justify-center mb-8">
+      <div className="flex justify-center mb-8 mt-16">
         <button
           className={`px-4 py-2 mx-2 rounded-md transition-colors ${
             selectedCategory === 'all' ? 'bg-[#F7B777] text-white' : 'bg-gray-200'
@@ -94,25 +84,17 @@ const MissionaryGallery = () => {
         </button>
       </div>
 
-      {/* Masonry Grid Layout */}
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
+      <LightGallery plugins={[lgZoom, lgVideo]} elementClassNames="custom-class-name">
         {galleryItems.map((item, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-lg p-6 mb-4 transform transition-transform hover:-translate-y-2 cursor-pointer"
-          >
+          <a key={index} data-lg-size="1400-933" className="gallery-item" data-src={item.src}>
             <img
-              src={item.src}
+              src={item.thumb}
               alt={item.alt}
-              className="w-full h-auto rounded-md object-cover"
+              className="w-60 h-auto rounded-md object-cover mb-4 pl-4 max-lg:w-72"
             />
-          </div>
+          </a>
         ))}
-      </Masonry>
+      </LightGallery>
     </div>
   );
 };
