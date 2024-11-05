@@ -57,7 +57,7 @@ export function NavBar() {
         className="p-1 font-normal"
       >
         <NavLink
-          to="/product"
+          to="/article"
           className="flex items-center text-xl xl:text-[13px] font-semibold uppercase"
         >
           Articles

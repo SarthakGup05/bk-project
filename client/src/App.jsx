@@ -33,7 +33,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/gallery/:category" element={<GallereyPage />} />
-          <Route path="/blogs" element={<Blogpage />} />
+          <Route path="/article" element={<Blogpage />} />
           <Route path="/avyakt-murli" element={<AmPage />} />
           <Route path="/schedule" element={<Date />} />
           <Route path="/anubhav" element={<Anubhav />} />
