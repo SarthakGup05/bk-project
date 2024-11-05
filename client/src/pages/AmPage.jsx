@@ -1,105 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import MurliHeader from "../components/Murlipage/MurliHeader";
+import PropTypes from "prop-types";
 
-const AmPage = () => {
-  // Sample data for blog posts (replace with real data later)
-  const amItems = [
-    {
-      id: 1,
-      title: 'AMAP Bhaktis - 1330hrs',
-      fullName: 'Dr. Divya Anubhav',
-      username: 'divya.anubhav',
-      profile_img: 'assets/images/profile1.png',
-      publishedAt: '2024-10-21',
-      des: 'Day 5: Realization about silent chant.',
-      tags: ['Spirituality'],
-      total_likes: 120,
-      banner: 'assets/images/banner1.png',
-    },
-    {
-      id: 2,
-      title: 'AMAP Bhaktis - 1100hrs',
-      fullName: 'Dr. Shyam Kumar',
-      username: 'shyam.kumar',
-      profile_img: 'assets/images/profile2.png',
-      publishedAt: '2024-10-20',
-      des: 'Exploring deeper meditative states.',
-      tags: ['Meditation'],
-      total_likes: 85,
-      banner: 'assets/images/banner2.png',
-    },
-  ];
-
-  // Function to format date
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Main Content Section */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800">Daily Bhakti Sessions</h2>
-          <p className="text-gray-600 mt-2">
-            Explore the daily bhakti sessions featuring spiritual insights and meditative discourses.
-          </p>
-        </div>
-
-        {/* AMAP Bhakti Items in List Format */}
-        <ul className="space-y-8">
-          {amItems.map((item) => (
-            <li key={item.id}>
-              <Link
-                to={`/blog/${item.id}`}
-                className="flex gap-4 items-start border border-gray-300 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl bg-white p-4"
-              >
-                {/* Square Banner Image */}
-                <div className="flex-shrink-0">
-                  <img
-                    src={item.banner}
-                    alt={`${item.title} banner`}
-                    className="w-16 h-16 object-cover rounded-lg"
-                  />
-                </div>
-
-                {/* Text Content */}
-                <div className="flex flex-col justify-between flex-grow">
-                  <div>
-                    {/* <div className="flex gap-2 items-center mb-2">
-                      <img
-                        src={item.profile_img}
-                        alt="author"
-                        className="w-8 h-8 rounded-full"
-                      />
-                      <div className="flex flex-col">
-                        <p className="text-sm font-bold">
-                          {item.fullName}{' '}
-                          <span className="text-gray-500">@{item.username}</span>
-                        </p>
-                        <p className="text-sm text-gray-500">{formatDate(item.publishedAt)}</p>
-                      </div>
-                    </div> */}
-
-                    <h1 className="text-lg font-semibold text-gray-800">{item.title}</h1>
-                    <p className="text-sm text-gray-700 line-clamp-2 mt-1">{item.des}</p>
-                  </div>
-
-                  <div className="flex justify-between items-center mt-3">
-                    <span className="text-gray-500 font-medium bg-gray-200 py-1 px-3 rounded-full">
-                      {item.tags[0]}
-                    </span>
-                    {/* Optional: Add total likes here */}
-                  </div>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </main>
-    </div>
-  );
+const murliData = {
+  title: "Daily Murli",
+  date: "04-11-2024",
+  content: `प्रात:मुरली ओम् शान्ति "बापदादा" मधुबन
+  “मीठे बच्चे - अपनी खामियां निकालनी हैं तो सच्चे दिल से बाप को सुनाओ, बाबा तुम्हें कमियों को निकालने की युक्ति बतायेंगे'' प्रश्नः- बाप की करेन्ट किन बच्चों को मिलती है?
+  उत्तर:- जो बच्चे ईमानदारी से सर्जन को अपनी बीमारी सुना देते हैं, बाबा उन्हें दृष्टि देता। बाबा को उन बच्चों पर बहुत तरस पड़ता है। अन्दर में आता इस बच्चे का यह भूत निकल जाये। बाबा उन्हें करेन्ट देता है।
+  
+  ओम् शान्ति। बाप बच्चों से पूछते रहते हैं। हर एक बच्चे को अपने से पूछना है कि बाप से कुछ मिला? किस-किस चीज़ में कमी है? ...`,
+  // Continue adding the rest of the Murli content here as a single string
 };
 
-export default AmPage;
+const MurliContent = ({ title = murliData.title, date = murliData.date, content = murliData.content }) => (
+  <div className="max-w-5xl mx-auto p-6 bg-white shadow-lg rounded-lg space-y-6 mt-32 w-full">
+    {/* Header Section */}
+    <MurliHeader title={title} date={date} />
+
+    {/* Murli Content */}
+    <div className="mt-4">
+      <p className="text-gray-800 leading-relaxed whitespace-pre-line">
+        {content}
+      </p>
+    </div>
+  </div>
+);
+
+MurliContent.propTypes = {
+  title: PropTypes.string,
+  date: PropTypes.string,
+  content: PropTypes.string,
+};
+
+export default MurliContent;
