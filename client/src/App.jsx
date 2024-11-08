@@ -24,6 +24,7 @@ import ContactUs from "./pages/ContactUs";
 import Volunteer from "./pages/Volunteer";
 import DevineExperience from "./pages/DevineExperience";
 import RajyogCommentry from "./pages/RajyogCommentry";
+import LiteraturePage from "./pages/Litraturepage";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/volunteer-us" element={<Volunteer />} />
           <Route path="/devine" element={<DevineExperience />} />
+          <Route path="/literature" element={<LiteraturePage />} />
         </Route>
        
 
