@@ -23,6 +23,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import Volunteer from "./pages/Volunteer";
 import DevineExperience from "./pages/DevineExperience";
+import RajyogCommentry from "./pages/RajyogCommentry";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/anubhav" element={<Anubhav />} />
           <Route path="/bhatti" element={<Bhatti />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/rajyog-commentry" element={<RajyogCommentry />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/volunteer-us" element={<Volunteer />} />
           <Route path="/devine" element={<DevineExperience />} />

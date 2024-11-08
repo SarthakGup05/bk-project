@@ -15,7 +15,7 @@ const servicesData = [
     title: "rajyoga commentry",
     imgSrc: "/assets/images/activities/1.jpg",
     alt: "rajyoga commentry",
-    link: "/Avyakt-murli",
+    link: "/rajyog-commentry",
     buttonLabel: "Read More",
   },
   {
