@@ -25,6 +25,7 @@ import Volunteer from "./pages/Volunteer";
 import DevineExperience from "./pages/DevineExperience";
 import RajyogCommentry from "./pages/RajyogCommentry";
 import LiteraturePage from "./pages/Litraturepage";
+import SongsPage from "./pages/SongsPage";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="/volunteer-us" element={<Volunteer />} />
           <Route path="/devine" element={<DevineExperience />} />
           <Route path="/literature" element={<LiteraturePage />} />
+          <Route path="/songs" element={<SongsPage />} />
         </Route>
        
 
