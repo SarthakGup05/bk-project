@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { AiOutlineDownload, AiOutlineEye } from "react-icons/ai";
 
 function LiteraturePage() {
-  const [activeIndex, setActiveIndex] = useState(null);
-
   // Define the data array within the component
   const sectionsData = [
     {
       title: "Spiritual Literature 1",
-      description: "5 PDFs available",
       pdfs: [
         { name: "Intro to Meditation", url: "/pdfs/intro_to_meditation.pdf" },
         { name: "Path to Peace", url: "/pdfs/path_to_peace.pdf" },
@@ -15,7 +13,6 @@ function LiteraturePage() {
     },
     {
       title: "Spiritual Literature 2",
-      description: "3 PDFs available",
       pdfs: [
         { name: "Inner Silence", url: "/pdfs/inner_silence.pdf" },
         { name: "Understanding Karma", url: "/pdfs/understanding_karma.pdf" },
@@ -23,53 +20,43 @@ function LiteraturePage() {
     },
   ];
 
-  const toggleSection = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
+  // Flatten the PDF array with numbering
+  const pdfsWithNumbering = sectionsData.flatMap((section) => section.pdfs);
 
   return (
     <div className="bg-white min-h-screen p-4 sm:p-8 text-black mt-28">
-      {sectionsData.map((section, index) => (
+      {pdfsWithNumbering.map((pdf, index) => (
         <div
           key={index}
-          className={`my-6 rounded-lg overflow-hidden shadow-md transition-all duration-300 ${
-            activeIndex === index ? "bg-[#F7B777]" : "bg-slate-100"
-          }`}
+          className="my-4 p-4 flex items-center justify-between rounded-lg shadow-md bg-[#F7B777] hover:bg-[#e6a666] transition-all duration-300"
         >
-          <div
-            className="flex justify-between items-center px-4 sm:px-6 py-4 cursor-pointer transition-colors duration-300"
-            onClick={() => toggleSection(index)}
-          >
-            <div className="flex items-center space-x-4">
-              <span className="text-2xl font-bold">{`0${index + 1}`}</span>
-              <h3 className="text-lg font-semibold">{section.title}</h3>
-            </div>
-            <span className="transition-transform duration-300">
-              {activeIndex === index ? "▲" : "▼"}
-            </span>
-          </div>
-          <div
-            className={`overflow-hidden transition-max-height duration-500 ease-in-out ${
-              activeIndex === index ? "max-h-screen" : "max-h-0"
-            }`}
-          >
-            <div className="bg-gray-100 px-4 sm:px-6 py-4">
-              <p className="mb-2 text-sm">{section.description}</p>
-              <ul>
-                {section.pdfs.map((pdf, i) => (
-                  <li key={i} className="text-sm mb-2">
-                    <a
-                      href={pdf.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#F7B777] underline"
-                    >
-                      {pdf.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <span className="text-lg font-semibold text-white">
+            {index + 1}. {pdf.name}
+          </span>
+          <div className="flex space-x-4">
+            {/* View PDF Icon with Tooltip */}
+            <a
+              href={pdf.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative text-white hover:text-gray-200 flex flex-col items-center"
+            >
+              <AiOutlineEye size={26} className="hover:scale-110 transition-transform duration-200" />
+              <span className="tooltip text-xs text-white bg-black p-1 rounded opacity-0 transition-opacity duration-200 absolute top-8 text-center">
+                View PDF
+              </span>
+            </a>
+            {/* Download PDF Icon with Tooltip */}
+            <a
+              href={pdf.url}
+              download
+              className="relative text-white hover:text-gray-200 flex flex-col items-center"
+            >
+              <AiOutlineDownload size={26} className="hover:scale-110 transition-transform duration-200" />
+              <span className="tooltip text-xs text-white bg-black p-1 rounded opacity-0 transition-opacity duration-200 absolute top-8 text-center">
+                Download PDF
+              </span>
+            </a>
           </div>
         </div>
       ))}
