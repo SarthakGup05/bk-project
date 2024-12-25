@@ -89,6 +89,12 @@ export function NavBar() {
           Meditation Experience
         </NavLink>
       </Typography>
+      <NavLink
+          to="/product"
+          className="flex items-center text-xl xl:text-[13px] font-semibold uppercase"
+        >
+          Books
+        </NavLink>
     </ul>
   );
 

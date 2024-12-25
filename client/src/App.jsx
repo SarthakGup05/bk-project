@@ -26,6 +26,9 @@ import DevineExperience from "./pages/DevineExperience";
 import RajyogCommentry from "./pages/RajyogCommentry";
 import LiteraturePage from "./pages/Litraturepage";
 import SongsPage from "./pages/SongsPage";
+import BookProduct from "./pages/BookProduct";
+import ShoppingCart from "./components/ShoppingCart";
+import BookGrid from "./components/BookGrid";
 
 function App() {
   return (
@@ -48,6 +51,9 @@ function App() {
           <Route path="/devine" element={<DevineExperience />} />
           <Route path="/literature" element={<LiteraturePage />} />
           <Route path="/songs" element={<SongsPage />} />
+          <Route path="/product-detail" element={<BookProduct />} />
+          <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/product" element={<BookGrid />} />
         </Route>
        
 
